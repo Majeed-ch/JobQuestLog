@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import JobService from "../services/JobService";
 
 class ListJobComponent extends Component {
     constructor(props) {
@@ -8,6 +9,13 @@ class ListJobComponent extends Component {
             jobs: []
         }
     }
+
+    componentDidMount() {
+        JobService.getJobApplications().then((res) => {
+           this.setState({jobs: res.data});
+        });
+    }
+
     render() {
         return (
             <div>
@@ -16,20 +24,21 @@ class ListJobComponent extends Component {
                     <table className="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Job Title</th>
+                                <th>Position Title</th>
                                 <th>Company Name</th>
                                 <th>Status</th>
-                                <th>Actions</th>
+                                <th>Action</th>
+
                             </tr>
                         </thead>
                             <tbody>
                             {
                                 this.state.jobs.map(
                                     job =>
-                                        <tr key={`job-${job.id}`}>
-                                            <td key={`job-${job.id}-title`}>{job.jobTitle}</td>
-                                            <td key={`job-${job.id}-company`}>{job.companyName}</td>
-                                            <td key={`job-${job.id}-status`}>{job.jobStatus}</td>
+                                        <tr key={job.id}>
+                                            <td>{job.positionTitle}</td>
+                                            <td>{job.companyName}</td>
+                                            <td>{job.status}</td>
                                         </tr>
                                 )
                             }
