@@ -8,6 +8,7 @@ class ListJobComponent extends Component {
         this.state = {
             jobs: []
         }
+        this.addApplication = this.addApplication.bind(this);
     }
 
     componentDidMount() {
@@ -16,11 +17,19 @@ class ListJobComponent extends Component {
         });
     }
 
+    addApplication(){
+        this.props.history.push('/add-application');
+    }
+
     render() {
         return (
             <div>
                 <div className="row">
+                    
+                </div>
+                <div className="row">
                     <h2 className="text-center">JOBS LIST</h2>
+                    <a href="./new-application" className="btn btn-outline-primary btn-lg w-auto mt-2 mb-2">Add application</a>
                     <table className="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -39,6 +48,7 @@ class ListJobComponent extends Component {
                                             <td>{job.positionTitle}</td>
                                             <td>{job.companyName}</td>
                                             <td>{job.status}</td>
+                                            <td><a href='#'>Update</a></td>
                                         </tr>
                                 )
                             }
