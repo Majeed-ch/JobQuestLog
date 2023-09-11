@@ -20,4 +20,8 @@ public class JobApplicationService {
     public List<JobApplication> getAll() {
         return repository.findAll();
     }
+
+    public JobApplication addJobApplication(JobApplication jobApplication){
+        return repository.save(jobApplication);
+    }
 }

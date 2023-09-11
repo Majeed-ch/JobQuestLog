@@ -1,3 +1,7 @@
+//This class defines the structure and mapping of a job application entity in the database.
+// We use this entity class in conjunction with a JPA repository to perform
+// database operations (e.g., create, read, update, delete) on job applications.
+
 package com.jobquestlog.model;
 
 import jakarta.persistence.*;
