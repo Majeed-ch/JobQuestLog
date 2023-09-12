@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import JobService from "../services/JobService";
+import { withRouter } from 'react-router-dom';  
 
 class ListJobComponent extends Component {
     constructor(props) {
@@ -29,7 +30,7 @@ class ListJobComponent extends Component {
                 </div>
                 <div className="row">
                     <h2 className="text-center">JOBS LIST</h2>
-                    <a href="./new-application" className="btn btn-outline-primary btn-lg w-auto mt-2 mb-2">Add application</a>
+                    <button className='btn btn-outline-primary btn-lg w-auto mt-2 mb-2' onClick={this.addApplication}>Add application</button>
                     <table className="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -61,4 +62,4 @@ class ListJobComponent extends Component {
     }
 }
 
-export default ListJobComponent;
+export default withRouter(ListJobComponent);
