@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import JobService from "../services/JobService";
 
 class ListJobComponent extends Component {
@@ -20,7 +21,11 @@ class ListJobComponent extends Component {
         return (
             <div>
                 <div className="row">
+                    
+                </div>
+                <div className="row">
                     <h2 className="text-center">JOBS LIST</h2>
+                    <Link to="/new-application" className='btn btn-outline-primary btn-lg w-auto mt-2 mb-2'>Add application</Link>
                     <table className="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -38,7 +43,8 @@ class ListJobComponent extends Component {
                                         <tr key={job.id}>
                                             <td>{job.positionTitle}</td>
                                             <td>{job.companyName}</td>
-                                            <td>{job.status}</td>
+                                            <td>{job.applicationStatus}</td>
+                                            <td><a href='#'>Update</a></td>
                                         </tr>
                                 )
                             }
