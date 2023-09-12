@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import ListJobComponent from './listJobComponent';
 
 class AddApplicationComponent extends Component {
 
@@ -72,9 +74,10 @@ class AddApplicationComponent extends Component {
                             </div>
                             <div className="form-group mt-2">
                                 <label  className="form-label">{this.LABELS.applicationStatus}</label>
-                                <select className="form-control" name="applicationStatus">
+                                <select className="form-control" name="applicationStatus" onChange={this.changeApplicationStatusHandler}>
+                                    <option defaultValue="Select application status">Select application status</option>
                                     {this.STATUS_OPTIONS.map((status, index) => (
-                                        <option key={index} value={status} onChange={this.changeApplicationStatusHandler}>
+                                        <option key={index} value={status}>
                                             {status}
                                         </option>
                                     ))}
@@ -82,7 +85,7 @@ class AddApplicationComponent extends Component {
                             </div>
                             <div className="mt-3 mb-3">
                                 <button type="submit" className="w-100 p-2 d-block btn btn-success" onClick={this.saveApplication}>ADD</button>
-                                <button className="w-100 p-2 d-block btn btn-outline-danger mt-2" onClick={this.cancel}>CANCEL</button>
+                                <Link to="/applications" className='w-100 p-2 d-block btn btn-outline-danger mt-2'>CANCEL</Link>
                             </div>
                         </form>
                     </div>

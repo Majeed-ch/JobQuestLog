@@ -7,6 +7,7 @@ function App() {
     <BrowserRouter>
       <div className="container">
         <Routes>
+          <Route exact path= "/" Component={ListJobComponent}></Route>
           <Route path= "/applications" Component={ListJobComponent}></Route>
           <Route path= "/new-application" Component={AddApplicationComponent}></Route>
         </Routes>
