@@ -9,17 +9,12 @@ class ListJobComponent extends Component {
         this.state = {
             jobs: []
         }
-        this.addApplication = this.addApplication.bind(this);
     }
 
     componentDidMount() {
         JobService.getJobApplications().then((res) => {
            this.setState({jobs: res.data});
         });
-    }
-
-    addApplication(){
-        this.props.history.push('/add-application');
     }
 
     render() {
@@ -48,7 +43,7 @@ class ListJobComponent extends Component {
                                         <tr key={job.id}>
                                             <td>{job.positionTitle}</td>
                                             <td>{job.companyName}</td>
-                                            <td>{job.status}</td>
+                                            <td>{job.applicationStatus}</td>
                                             <td><a href='#'>Update</a></td>
                                         </tr>
                                 )

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ListJobComponent from './listJobComponent';
+import JobService from '../services/JobService';
 
 class AddApplicationComponent extends Component {
 
@@ -16,7 +17,6 @@ class AddApplicationComponent extends Component {
         this.changeCompanyNameHandler = this.changeCompanyNameHandler.bind(this);
         this.changeApplicationStatusHandler = this.changeApplicationStatusHandler.bind(this);
         this.saveApplication = this.saveApplication.bind(this);
-        this.cancel = this.cancel.bind(this);
     }
     
     LABELS = {
@@ -45,11 +45,13 @@ class AddApplicationComponent extends Component {
             applicationStatus: this.state.applicationStatus
         };
 
-        console.log('application => ' + JSON.stringify(jobApplication));
-    }
+        console.log('adding an application => ' + JSON.stringify(jobApplication));
 
-    cancel(){
-        this.props.history.push('/add-application');
+        JobService.addJopApplication(jobApplication).then(res => {
+            console.log("Added the job application!");
+            // TODO: make it redirect to the applications page after successfully adding,
+            // and consider a notification popup.
+        });
     }
 
     render() {

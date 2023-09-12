@@ -19,7 +19,7 @@ public class JobApplication {
     @Column(name = "company_name")
     private String companyName;
     @Column(name = "status")
-    private String status;
+    private String applicationStatus;
 
     public JobApplication() {
     }
@@ -48,11 +48,11 @@ public class JobApplication {
         this.companyName = companyName;
     }
 
-    public String getStatus() {
-        return status;
+    public String getApplicationStatus() {
+        return applicationStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setApplicationStatus(String status) {
+        this.applicationStatus = status;
     }
 }
