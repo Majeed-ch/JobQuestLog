@@ -44,7 +44,9 @@ class ListJobComponent extends Component {
                                             <td>{job.positionTitle}</td>
                                             <td>{job.companyName}</td>
                                             <td>{job.applicationStatus}</td>
-                                            <td><a href='#'>Update</a></td>
+                                            <td>
+                                                <Link to={`/applications/${job.id}`} className="btn btn-info btn-sm">View</Link>
+                                            </td>
                                         </tr>
                                 )
                             }
