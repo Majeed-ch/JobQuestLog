@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 //The JobApplicationController is a typical example of a RESTful controller in Spring Boot.
 // It provides an HTTP endpoint ("/applications") for retrieving a list of job applications,
@@ -44,4 +45,24 @@ public class JobApplicationController {
 
         return ResponseEntity.ok(application);
     }
+
+    @PutMapping("/applications/{id}")
+    public ResponseEntity<JobApplication> updateApplication(@PathVariable Long id, @RequestBody JobApplication applicationBody){
+        JobApplication application = service.getById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Job Application not found with ID: "+id));
+
+        if (applicationBody.getPositionTitle() != null){
+            application.setPositionTitle(applicationBody.getPositionTitle());
+        }
+        if (applicationBody.getCompanyName() != null){
+            application.setCompanyName(applicationBody.getCompanyName());
+        }
+        if (applicationBody.getApplicationStatus() != null){
+            application.setApplicationStatus(applicationBody.getApplicationStatus());
+        }
+
+        JobApplication updatedApplication = service.updateJobApplication(application);
+        return ResponseEntity.ok(updatedApplication);
+    }
+
 }
