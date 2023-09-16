@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import JobService from '../services/JobService';
+import Modal from 'react-modal';
+import '../index.css'
 
 function ViewApplicationComponent() {
 
@@ -22,6 +24,8 @@ function ViewApplicationComponent() {
         applicationStatus: ""
     });
 
+    const [isModalOpen, setModalOpen] = useState(false);
+
     // useEffect hook to replace componentDidMount
     useEffect(() => {
         JobService.getJobApplicationById(id).then((res) => {
@@ -36,29 +40,30 @@ function ViewApplicationComponent() {
     });
 
     const handleDeleteClick = () => {
-        const userConfirmed = window.confirm("Are you sure you want to delete this Job Application?");
-        if (userConfirmed){
-            deleteEntry();
-        }
+        setModalOpen(true);
     }
 
-    const deleteEntry = () => {
+    const deleteApplication = () => {
         // Add the API method to delete the job application
         //JobService.deleteJobApplication(id);
-
         console.log(`Application #${id} is Deleted successfully!`);
         navigate("/applications");
+        setModalOpen(false);
     }
 
+    const closeModal = () => {
+        setModalOpen(false);
+    }
     
     return (
+        <>
         <div className="container mt-5">
             <div className="card">
                 <div className="card-header d-flex justify-content-between">
                     <span>Job Application</span>
                     <div>
                         <span> <b>#{id}</b></span>
-                        <button className="btn btn-outline-danger ms-3" onClick={handleDeleteClick}>Delete</button>
+                        <button className="btn btn-outline-danger btn-sm ms-3" onClick={handleDeleteClick}>Delete</button>
                     </div>
                 </div>
                 <div className="card-body">
@@ -79,6 +84,32 @@ function ViewApplicationComponent() {
             </div>
             <button className="btn btn-outline-secondary w-25 mt-2" onClick={() => {navigate("/applications")}} >Back</button>
         </div>
+
+        <Modal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                contentLabel="Delete Confirmation"
+                className="customModal"
+                overlayClassName="customOverlay"
+            >
+                <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title">Confirmation</h5>
+                    <button type="button" className="close" onClick={closeModal}>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div className="modal-body">
+                    Are you sure you want to delete this job application?
+                </div>
+                <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" onClick={closeModal}>Cancel</button>
+                    <button type="button" className="btn btn-danger" onClick={deleteApplication}>Yes, Delete</button>
+                </div>
+            </div>
+        </Modal>
+        </>
+            
     );
 }
 
