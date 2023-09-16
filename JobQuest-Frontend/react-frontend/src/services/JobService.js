@@ -16,6 +16,10 @@ class JobService{
         return axios.get(JOB_API_BASE_URL + SLASH + applicationId);
     }
 
+    deleteJobApplication(applicationId){
+        return axios.delete(JOB_API_BASE_URL + SLASH + applicationId)
+    }
+
 }
 //Note: We are exporting object of this class.
 //We can directly use object of this class inside a component.
