@@ -35,16 +35,34 @@ function ViewApplicationComponent() {
         });
     });
 
+    const handleDeleteClick = () => {
+        const userConfirmed = window.confirm("Are you sure you want to delete this Job Application?");
+        if (userConfirmed){
+            deleteEntry();
+        }
+    }
+
+    const deleteEntry = () => {
+        // Add the API method to delete the job application
+        //JobService.deleteJobApplication(id);
+
+        console.log(`Application #${id} is Deleted successfully!`);
+        navigate("/applications");
+    }
+
     
     return (
         <div className="container mt-5">
             <div className="card">
                 <div className="card-header d-flex justify-content-between">
                     <span>Job Application</span>
-                    <span> <b>#{id}</b></span>
+                    <div>
+                        <span> <b>#{id}</b></span>
+                        <button className="btn btn-outline-danger ms-3" onClick={handleDeleteClick}>Delete</button>
+                    </div>
                 </div>
                 <div className="card-body">
-                    <table class="table">
+                    <table className="table">
                         {<tbody>
                             {
                                 Object.entries(LABELS).map(([key, label]) => (
