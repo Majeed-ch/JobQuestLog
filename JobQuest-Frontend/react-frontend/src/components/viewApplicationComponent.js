@@ -28,16 +28,20 @@ function ViewApplicationComponent() {
 
     // useEffect hook to replace componentDidMount
     useEffect(() => {
-        JobService.getJobApplicationById(id).then((res) => {
-            const app = res.data;
-            setState(prevState => ({
-                ...prevState,
-                positionTitle: app.positionTitle,
-                companyName: app.companyName,
-                applicationStatus: app.applicationStatus
-            }));
-        });
-    });
+        JobService.getJobApplicationById(id)
+            .then((res) => {
+                const app = res.data;
+                setState({
+                    positionTitle: app.positionTitle,
+                    companyName: app.companyName,
+                    applicationStatus: app.applicationStatus
+                });
+            })
+            .catch((error) => {
+                console.error('Error fetching job application:', error);
+            });
+    }, [id]); // Add id as a dependency to fetch data when id changes
+
 
     const handleDeleteClick = () => {
         setModalOpen(true);
@@ -45,10 +49,10 @@ function ViewApplicationComponent() {
 
     const deleteApplication = () => {
         // Add the API method to delete the job application
-        //JobService.deleteJobApplication(id);
-        console.log(`Application #${id} is Deleted successfully!`);
-        navigate("/applications");
-        setModalOpen(false);
+        JobService.deleteJobApplication(id).then(() => {
+            console.log(`Application #${id} is Deleted successfully!`);
+            navigate('/applications');
+        });
     }
 
     const closeModal = () => {

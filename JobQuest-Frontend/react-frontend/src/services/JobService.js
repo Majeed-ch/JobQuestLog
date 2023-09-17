@@ -16,6 +16,10 @@ class JobService{
         return axios.get(JOB_API_BASE_URL + SLASH + applicationId);
     }
 
+    updateJobApplication(applicationId, updatedApplication) {
+        return axios.put(JOB_API_BASE_URL + SLASH + applicationId, updatedApplication);
+    }
+
     deleteJobApplication(applicationId){
         return axios.delete(JOB_API_BASE_URL + SLASH + applicationId)
     }

@@ -65,4 +65,10 @@ public class JobApplicationController {
         return ResponseEntity.ok(updatedApplication);
     }
 
+    @DeleteMapping("/applications/{id}")
+    public ResponseEntity<Void> deleteJobApplication(@PathVariable Long id) {
+        service.deleteJobApplication(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

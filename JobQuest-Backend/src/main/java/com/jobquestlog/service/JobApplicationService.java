@@ -47,4 +47,15 @@ public class JobApplicationService {
         logger.info("Updating job application with ID: {}", jobApplication.getId());
         return repository.save(jobApplication);
     }
+
+    @Transactional
+    public void deleteJobApplication(Long id) {
+        logger.info("Deleting job application with ID: {}", id);
+        if (!repository.existsById(id)) {
+            logger.error("Attempt to delete non-existing job application with ID: {}", id);
+            throw new ResourceNotFoundException("Job Application not found. ID: " + id);
+        }
+        repository.deleteById(id);
+    }
+
 }
